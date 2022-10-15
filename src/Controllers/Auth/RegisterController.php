@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Auth;
 
 use App\Domain\User\Models\User;
 use Slim\Http\Request;
@@ -8,6 +8,12 @@ use Slim\Http\Response;
 
 class RegisterController
 {
+    /**
+     * Register the user
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
     public function register(Request $request, Response $response): Response
     {
         // check if all required fields are valid
@@ -45,12 +51,22 @@ class RegisterController
         }
     }
 
+    /**
+     * Check if user already exists
+     * @param string $email
+     * @return bool
+     */
     protected function canRegister(string $email): bool
     {
         return !!User::where('email', $email)->count();
     }
 
-    protected function isValid(Request $request)
+    /**
+     * Validates the data
+     * @param Request $request
+     * @return array
+     */
+    protected function isValid(Request $request): array
     {
         $validator = new \Valitron\Validator([
             'username' => $request->getParam('username') ?? null,
