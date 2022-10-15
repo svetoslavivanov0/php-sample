@@ -11,7 +11,6 @@ return function (ContainerBuilder $containerBuilder) {
     // load .env
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
     $dotenv->load();
-    var_dump($_ENV);exit;
 
     // Global Settings Object
     $containerBuilder->addDefinitions([
