@@ -12,7 +12,9 @@ final class CreateUsersTable extends AbstractMigration
             ->addColumn('username', 'string')
             ->addColumn('password', 'string')
             ->addColumn('email', 'string')
-            ->addColumn('created_at', 'datetime')
+            ->addColumn('created_at', 'timestamp')
+            ->addColumn('updated_at', 'timestamp')
+            ->addIndex('email', \Phoenix\Database\Element\Index::TYPE_UNIQUE)
             ->create();
     }
 
