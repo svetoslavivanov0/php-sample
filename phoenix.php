@@ -6,7 +6,7 @@ $dotenv->load();
 
 return [
     'migration_dirs' => [
-        'first' => __DIR__ . '/database/migrations',
+        'first' => __DIR__ . '/Application/database/migrations',
     ],
     'environments' => [
         'local' => [

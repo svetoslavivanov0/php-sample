@@ -1,10 +1,15 @@
 <?php
 // Routes
+namespace App;
 
-$app->get('/[{name}]', function ($request, $response, $args) {
-    // Sample log message
-    $this->logger->info("Slim-Skeleton '/' route");
+use App\Controllers\HomeController;
+use App\Middleware\AuthMiddleware;
+use Psr\Container\ContainerInterface;
 
-    // Render index view
-    return $this->renderer->render($response, 'index.phtml', $args);
+
+/** @var ContainerInterface $app */
+$app->get('/', function ($request, $response, $args) {
+
 });
+
+$app->get('/{id}', HomeController::class . ':show');
