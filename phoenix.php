@@ -1,12 +1,12 @@
 <?php
 
 // load .env
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/src/');
 $dotenv->load();
 
 return [
     'migration_dirs' => [
-        'first' => __DIR__ . '/Application/database/migrations',
+        'first' => __DIR__ . '/src/database/migrations',
     ],
     'environments' => [
         'local' => [

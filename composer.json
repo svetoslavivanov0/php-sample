@@ -22,6 +22,7 @@
         "slim/php-view": "^2.0",
         "monolog/monolog": "^1.17",
         "vlucas/phpdotenv": "^5.4",
-        "lulco/phoenix": "^2.2"
+        "lulco/phoenix": "^2.2",
+        "illuminate/database": "^9.35"
     }
 }
