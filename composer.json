@@ -23,6 +23,7 @@
         "monolog/monolog": "^1.17",
         "vlucas/phpdotenv": "^5.4",
         "lulco/phoenix": "^2.2",
-        "illuminate/database": "^9.35"
+        "illuminate/database": "^9.35",
+        "vlucas/valitron": "^1.4"
     }
 }
