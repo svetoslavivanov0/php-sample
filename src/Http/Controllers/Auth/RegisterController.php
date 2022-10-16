@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
 use App\Domain\User\Models\User;
 use Slim\Http\Request;
@@ -14,7 +14,7 @@ class RegisterController
      * @param Response $response
      * @return Response
      */
-    public function register(Request $request, Response $response): Response
+    public function store(Request $request, Response $response): Response
     {
         // check if all required fields are valid
         $validatedRequst = $this->isValid($request);
