@@ -11,7 +11,13 @@ use Valitron\Validator;
 
 class LoginController
 {
-    public function login(Request $request, Response $response)
+    /**
+     * Loggin user
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
+    public function login(Request $request, Response $response): Response
     {
         $dotenv = Dotenv::createImmutable(__DIR__ . '/../../../');
         $dotenv->load();
@@ -41,7 +47,12 @@ class LoginController
         }
     }
 
-    protected function isValid(Request $request)
+    /**
+     * Check if request is valid
+     * @param Request $request
+     * @return array
+     */
+    protected function isValid(Request $request): array
     {
         $email = $request->getParam('email') ?? null;
         $password = $request->getParam('password') ?? null;
