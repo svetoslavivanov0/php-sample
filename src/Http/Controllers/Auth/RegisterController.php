@@ -73,8 +73,10 @@ class RegisterController
             'email' => $request->getParam('email') ?? null,
             'password' => $request->getParam('password') ?? null,
         ]);
+
         $validator
             ->rule('required', ['username', 'email', 'password'])
+            ->rule('lengthMin', 'password', 7)
             ->rule('email', 'email');
 
         return [
