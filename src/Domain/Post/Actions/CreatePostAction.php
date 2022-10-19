@@ -2,11 +2,12 @@
 
 namespace App\Domain\Post\Actions;
 
+use App\Domain\Post\Models\Post;
 use App\Domain\User\Models\User;
 use Exception;
 use Slim\Http\Request;
 
-class CreatePost
+class CreatePostAction
 {
     /**
      * @param User $user
@@ -14,7 +15,7 @@ class CreatePost
      * @return mixed
      * @throws Exception
      */
-    public function handle(User $user, Request $request): mixed
+    public function handle(User $user, Request $request): Post
     {
         if (!$title = $request->getParam('title')) {
             throw new Exception('Title is required!');

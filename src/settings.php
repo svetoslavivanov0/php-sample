@@ -16,7 +16,7 @@ return [
             'path' => __DIR__ . '/../logs/app.log',
         ],
 
-        'determineRouteBeforeAppMiddleware' => false,
+        'determineRouteBeforeAppMiddleware' => true,
         'displayErrorDetails' => true,
         'db' => [
             'driver' => 'mysql',

@@ -1,6 +1,10 @@
 <?php
 // DIC configuration
 
+use App\Domain\Post\Actions\CreatePostAction;
+use App\Domain\Post\Actions\DeletePostAction;
+use App\Domain\Post\Actions\UpdatePostAction;
+
 $container = $app->getContainer();
 
 // monolog
@@ -23,3 +27,15 @@ $container['db'] = function ($container) {
 };
 
 $container->get('db');
+
+$container['createPostAction'] = function ($container) {
+    return new CreatePostAction();
+};
+
+$container['updatePostAction'] = function ($container) {
+    return new UpdatePostAction();
+};
+
+$container['deletePostAction'] = function ($container) {
+    return new DeletePostAction();
+};
