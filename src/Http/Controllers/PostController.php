@@ -18,7 +18,7 @@ class PostController
     }
 
     /**
-     * Show posts
+     * Show postsphp
      * @param Request $request
      * @param Response $response
      * @param $args
@@ -110,7 +110,9 @@ class PostController
                 'post' => [
                     'id' => $post->id,
                     'title' => $post->title,
-                    'content' => $post->content
+                    'content' => $post->content,
+                    'created_at' => date_format($post->created_at, 'm/d'),
+                    'author' => $user->username
                 ]
             ]);
     }

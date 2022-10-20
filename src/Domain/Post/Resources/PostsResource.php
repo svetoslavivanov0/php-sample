@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Domain\Post\Resources;
 
 use Illuminate\Database\Eloquent\Collection;
@@ -18,9 +19,11 @@ class PostsResource
 
         /** @var \App\Domain\Post\Models\Post $post */
         foreach ($this->posts as $post) {
-            $data[$post->id] = [
+            $data[] = [
+                'id' => $post->id,
                 'title' => $post->title,
-                'content' => $post->content
+                'content' => $post->content,
+                'created_at' => date_format($post->created_at, 'm/d')
             ];
         }
 

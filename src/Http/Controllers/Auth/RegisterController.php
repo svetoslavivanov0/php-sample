@@ -21,7 +21,7 @@ class RegisterController
 
         if (!$validatedRequst['is_valid']) {
             return $response
-                ->withJson(422)
+                ->withStatus(422)
                 ->withJson([
                     'message' => reset($validatedRequst['errors'])[0]
                 ]);
