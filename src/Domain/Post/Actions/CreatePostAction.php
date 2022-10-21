@@ -25,6 +25,20 @@ class CreatePostAction
             throw new Exception('Content is required!');
         }
 
+        $validator = new \Valitron\Validator([
+            'title' => $request->getParam('title'),
+            'content' => $request->getParam('content'),
+        ]);
+
+        $validator
+            ->rule('required', ['title', 'content']);
+
+        $validator->validate();
+
+        if ($errors = $validator->errors()) {
+            throw new Exception(reset($errors)[0]);
+        }
+
         return $user->posts()->create([
             'title' => $title,
             'content' => $content
