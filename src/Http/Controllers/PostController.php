@@ -96,7 +96,13 @@ class PostController
         }
     }
 
-    public function show(Request $request, Response $response, $args)
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @param $args
+     * @return Response
+     */
+    public function show(Request $request, Response $response, $args): Response
     {
         $user = $this->getUserFromRequest($request);
         $postId = $args['id'];
@@ -147,6 +153,23 @@ class PostController
                     'message' => $e->getMessage()
                 ]);
         }
+    }
+
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
+    public function all(Request $request, Response $response): Response
+    {
+        $maxPosts = 15;
+
+        $posts = Post::orderBy('created_at', 'desc')->take($maxPosts)->get();
+        $data = new PostsResource($posts);
+
+        return $response
+            ->withJson(['posts' => $data->toArray()])
+            ->withStatus(200);
     }
 
     /**

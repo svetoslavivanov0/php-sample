@@ -19,6 +19,7 @@ $app->group('/api', function () use ($app) {
     $app->post('/me', UserController::class . ':index');
 
     $app->get('/posts', PostController::class . ':index');
+    $app->get('/posts/all', PostController::class . ':all');
     $app->post('/posts/create', PostController::class . ':store');
     $app->post('/posts/{id}/update', PostController::class . ':update')->add(new AuthorMiddleware());
     $app->get('/posts/{id}/edit', PostController::class . ':show')->add(new AuthorMiddleware());
