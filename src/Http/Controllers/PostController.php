@@ -37,7 +37,7 @@ class PostController
                 ]);
         }
 
-        $data = new PostsResource($user->posts()->get());
+        $data = new PostsResource($user->posts()->orderBy('created_at', 'desc')->get());
 
         return $response
             ->withJson(['posts' => $data->toArray()])
