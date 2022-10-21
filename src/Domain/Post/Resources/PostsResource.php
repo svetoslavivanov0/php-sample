@@ -20,6 +20,7 @@ class PostsResource
         /** @var \App\Domain\Post\Models\Post $post */
         foreach ($this->posts as $post) {
             $data[] = [
+                'author' => $post->user->username,
                 'id' => $post->id,
                 'title' => $post->title,
                 'content' => $post->content,
