@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Domain\Post\Models\Post;
 use App\Domain\Post\Resources\PostsResource;
 use App\Domain\User\Models\User;
 use Slim\Container;
@@ -100,9 +101,12 @@ class PostController
         $user = $this->getUserFromRequest($request);
         $postId = $args['id'];
 
-        $post = $user
-            ->posts()
-            ->findOrFail($postId);
+        $post = Post::find($postId);
+
+        if (!$post) {
+            return $response
+                ->withStatus(404);
+        }
 
         return $response
             ->withStatus(200)

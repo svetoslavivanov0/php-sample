@@ -21,6 +21,7 @@ $app->group('/api', function () use ($app) {
     $app->get('/posts', PostController::class . ':index');
     $app->post('/posts/create', PostController::class . ':store');
     $app->post('/posts/{id}/update', PostController::class . ':update')->add(new AuthorMiddleware());
+    $app->get('/posts/{id}/edit', PostController::class . ':show')->add(new AuthorMiddleware());
     $app->get('/posts/{id}', PostController::class . ':show');
     $app->delete('/posts/{id}/delete', PostController::class . ':destroy')->add(new AuthorMiddleware());
 });
