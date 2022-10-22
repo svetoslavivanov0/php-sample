@@ -3,14 +3,10 @@
 namespace App;
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
-use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middlewares\AuthorMiddleware;
-use Tuupola\Middleware\JwtAuthentication;
 
 $app->post('/register', RegisterController::class . ':store');
 $app->post('/login', LoginController::class . ':login');
