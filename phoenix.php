@@ -1,12 +1,13 @@
 <?php
 
 // load .env
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/src/');
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/');
 $dotenv->load();
 
 return [
     'migration_dirs' => [
-        'first' => __DIR__ . '/src/database/migrations',
+        'local' => __DIR__ . '/database/migrations',
+        'test' => __DIR__ . '/database/migrations',
     ],
     'environments' => [
         'local' => [
@@ -18,13 +19,12 @@ return [
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_general_ci', // optional, if not set default collation for utf8mb4 is used
         ],
-        'production' => [
+        'test' => [
             'adapter' => 'mysql',
-            'host' => 'production_host',
-            'port' => 3306, // optional
-            'username' => 'user',
-            'password' => 'pass',
-            'db_name' => 'my_production_db',
+            'host' => $_ENV['TEST_DB_HOST'],
+            'db_name' => $_ENV['TEST_DB_NAME'],
+            'username' => $_ENV['TEST_DB_USER'],
+            'password' => $_ENV['TEST_DB_PASSWORD'],
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_general_ci', // optional, if not set default collation for utf8mb4 is used
         ],

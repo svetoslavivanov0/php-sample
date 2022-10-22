@@ -5,6 +5,7 @@ namespace App\Domain\Post\Actions;
 use App\Domain\Post\Models\Post;
 use App\Domain\User\Models\User;
 use Exception;
+use Psr\Log\InvalidArgumentException;
 use Slim\Http\Request;
 
 class CreatePostAction
@@ -18,11 +19,11 @@ class CreatePostAction
     public function handle(User $user, Request $request): Post
     {
         if (!$title = $request->getParam('title')) {
-            throw new Exception('Title is required!');
+            throw new InvalidArgumentException('Title is required!');
         }
 
         if (!$content = $request->getParam('content')) {
-            throw new Exception('Content is required!');
+            throw new InvalidArgumentException('Content is required!');
         }
 
         $validator = new \Valitron\Validator([

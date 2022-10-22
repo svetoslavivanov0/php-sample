@@ -17,10 +17,6 @@ class DeletePostAction
     {
         $post = $user->posts()->find($postId);
 
-        if (!$post) {
-            throw new Exception('User not author!');
-        }
-
         return tap($post->delete());
     }
 }
