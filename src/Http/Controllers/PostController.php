@@ -37,10 +37,27 @@ class PostController
                 ]);
         }
 
-        $data = new PostsResource($user->posts()->orderBy('created_at', 'desc')->get());
+        [
+            $maxPosts,
+            $page,
+            $skip,
+            $maxPages
+        ] = $this->getPagedData($request, $user);
+
+        $posts = $user
+            ->posts()
+            ->orderBy('created_at', 'desc')
+            ->skip($skip)
+            ->take($maxPosts)
+            ->get();
+
+        $data = new PostsResource($posts);
 
         return $response
-            ->withJson(['posts' => $data->toArray()])
+            ->withJson([
+                'hasMorePosts' => $page < $maxPages,
+                'posts' => $data->toArray(),
+            ])
             ->withStatus(200);
     }
 
@@ -162,14 +179,49 @@ class PostController
      */
     public function all(Request $request, Response $response): Response
     {
-        $maxPosts = 15;
+        [
+            $maxPosts,
+            $page,
+            $skip,
+            $maxPages
+        ] = $this->getPagedData($request);
 
-        $posts = Post::orderBy('created_at', 'desc')->take($maxPosts)->get();
+        $posts = Post::orderBy('created_at', 'desc')
+            ->skip($skip)
+            ->take($maxPosts)
+            ->get();
         $data = new PostsResource($posts);
 
         return $response
-            ->withJson(['posts' => $data->toArray()])
+            ->withJson([
+                'posts' => $data->toArray(),
+                'hasMorePosts' => $page < $maxPages,
+            ])
             ->withStatus(200);
+    }
+
+    /**
+     * Returns paged data
+     * @param Request $request
+     * @param User|null $user
+     * @return array
+     */
+    protected function getPagedData(Request $request, User $user = null): array
+    {
+        $maxPosts = 5;
+        $page = $request->getParam('page') !== null ? $request->getParam('page') : 1;
+        $skip = ($page - 1) * $maxPosts;
+
+        $totalPosts = !!$user ? $user->posts()->count() : Post::all()->count();
+
+        $maxPages = ceil($totalPosts / $maxPosts);
+
+        return [
+            $maxPosts,
+            $page,
+            $skip,
+            $maxPages
+        ];
     }
 
     /**
