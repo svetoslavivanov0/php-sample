@@ -31,7 +31,7 @@ class PostController
 
         if (!$user) {
             return $response
-                ->withStatus(404)
+                ->withStatus(401)
                 ->withJson([
                     'message' => 'Not a user!'
                 ]);
