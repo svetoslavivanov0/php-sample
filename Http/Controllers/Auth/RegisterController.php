@@ -28,7 +28,7 @@ class RegisterController
         }
 
         // check if user exists
-        if ($this->canRegister(
+        if ($this->userExist(
             $request->getParam('email')
         )) {
             return $response
@@ -56,7 +56,7 @@ class RegisterController
      * @param string $email
      * @return bool
      */
-    protected function canRegister(string $email): bool
+    protected function userExist(string $email): bool
     {
         return !!User::where('email', $email)->count();
     }
